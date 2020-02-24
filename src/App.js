@@ -1,35 +1,31 @@
-import React, { Component } from 'react';
-import './App.css';
+import React from "react";
+import "./App.css";
 
-import Rectangle from './components/Rectangle/index';
-import { Container } from 'react-bootstrap';
+import { Container } from "react-bootstrap";
+import Rectangle from "./components/Rectangle/index";
 
-class App extends Component {
-  constructor(props) {
-    super(props);
+function App() {
+  const renderRectangle = value => {
+    const blueBg = "#282f54";
+    const greenBg = "#285428";
+    var rectangleId = value + 1;
 
-    this.state = {
-      rectangle: [0],
-    }
-  }
-
-  renderRectangle = (i) => {
-    return <Rectangle value={this.state.rectangle[i]} />;
-  }
-
-  render() {
+    if (rectangleId % 3 === 0) {
       return (
-        <Container>        
-          {
-            [...Array(15)].map ((n) => {
-              console.log(n);
-              return this.renderRectangle(n)
-            }
-            )
-          }   
-        </Container>
+        <Rectangle value={rectangleId} style={{ backgroundColor: blueBg }} />
       );
-  }  
+    } else {
+      return (
+        <Rectangle value={rectangleId} style={{ backgroundColor: greenBg }} />
+      );
+    }
+  };
+
+  return (
+    <Container>
+      {[...Array(15)].map((key, value) => renderRectangle(value))}
+    </Container>
+  );
 }
 
 export default App;
